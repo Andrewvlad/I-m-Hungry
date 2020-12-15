@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Complete and destroy login activity once successful
 //                finish();
-                setContentView(R.layout.activity_maps);
+                setContentView(R.layout.activity_main);
             }
         });
 
