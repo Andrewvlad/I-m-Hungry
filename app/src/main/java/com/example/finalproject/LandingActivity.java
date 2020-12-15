@@ -74,32 +74,6 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton onWayButton = (ImageButton)findViewById(R.id.on_my_way_button);
-        onWayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                try {
-                    fakePress(v);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                new CountDownTimer(2000, 2000) {
-
-                    @Override
-                    public void onTick(long l) {
-                        Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                        v.getContext().startActivity(intent);
-                    }
-                }.start();
-            }
-        });
-
         ImageButton coffeeButton = (ImageButton)findViewById(R.id.coffee_button);
         coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,20 +157,16 @@ public class LandingActivity extends AppCompatActivity {
                 "&radius=" + TempInfo.getRadius() +
                 "&limit=50" +
                 "&open_now=True";
-        Log.e("url", myUrl);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, myUrl,
                 null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.e("Response", response.toString());
-
                 try {
                     JSONArray jsonArray = response.getJSONArray("businesses");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         setNameValue.add(jsonArray.getJSONObject(i).getString("name"));
-                        Log.e("Test Error:", setNameValue.get(i));
                         setDistanceValue.add(jsonArray.getJSONObject(i).getInt("distance"));
                         List<String> tempList1 = new ArrayList<>();
                         if (jsonArray.getJSONObject(i).has("transactions")) {
@@ -247,7 +217,6 @@ public class LandingActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Error", "Error: " + error.getMessage());
                 Toast.makeText(LandingActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

@@ -79,9 +79,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
                 radiusSeekBar.setProgress(6);
             break;
         }
-        TempInfo.setMapHeader("Coffee Near You");
         mapHeader = findViewById(R.id.mapHeader);
-        mapHeader.setText(TempInfo.getMapHeader());
+        mapHeader.setText(TempInfo.getSearch() + " Near You");
 
         locationTrack = new LocationTrack(MapsActivity.this);
 

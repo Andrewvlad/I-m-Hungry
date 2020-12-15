@@ -4,11 +4,10 @@ package com.example.finalproject.data;
 public class TempInfo {
 
     private static int ratingPreference = 3;
-    private static String mapHeader;
     private static double currentLongitude;
     private static double currentLatitude;
     private static int radius = 7 * 1609;
-    private static float zoomLevel = 12.0f;
+    private static float zoomLevel = 10.8f;
     private static String searchTerm = "Restaurants";
 
 
@@ -18,14 +17,6 @@ public class TempInfo {
 
     public static int getRatingPreference(){
         return ratingPreference;
-    }
-
-    public static void setMapHeader(String newHeader){
-        mapHeader = newHeader;
-    }
-
-    public static String getMapHeader(){
-        return searchTerm;
     }
 
     public static void setCurrentLongitude(double newLongitude){
@@ -60,8 +51,8 @@ public class TempInfo {
         return zoomLevel;
     }
 
-    public static void setSearch(String newSearch){
-        searchTerm = newSearch;
+    public static void setSearch(String newSearchTerm){
+        searchTerm = newSearchTerm;
     }
 
     public static String getSearch() {
