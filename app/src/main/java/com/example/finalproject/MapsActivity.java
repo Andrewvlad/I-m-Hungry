@@ -1,8 +1,12 @@
 package com.example.finalproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SeekBar;
@@ -25,6 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback, LocationListener {
 
@@ -32,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
-    private Activity context;
+//    private Activity context;
     private SeekBar ratingSeekBar;
     private SeekBar radiusSeekBar;
     private TextView mapHeader;
@@ -200,9 +205,26 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
 
 
     @Override
-    public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(this, "Info window clicked",
-                Toast.LENGTH_SHORT).show();
+    public void onInfoWindowClick(final Marker marker) {
+        final Uri uri =  Uri.parse("google.navigation:q=" + marker.getPosition().latitude + "," + marker.getPosition().longitude);
+        Activity context = MapsActivity.this;
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Open Directions in Google Maps?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        Activity context = MapsActivity.this;
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void drawCircle( LatLng location ) {

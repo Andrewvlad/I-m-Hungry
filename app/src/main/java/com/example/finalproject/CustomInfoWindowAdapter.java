@@ -1,9 +1,16 @@
 package com.example.finalproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.finalproject.data.LocationInfo;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,6 +28,40 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     public CustomInfoWindowAdapter(Activity context){
         this.context = context;
+    }
+
+    public void getDirections(Marker marker){
+        final String latPosition = String.valueOf(marker.getPosition().latitude);
+        final String lonPosition = String.valueOf(marker.getPosition().longitude);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Open Google Maps?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        String latitude = latPosition;
+                        String longitude = lonPosition;
+                        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude);
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+
+//                        try{
+//                            if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+//                                startActivity(mapIntent);
+//                            }
+//                        }catch (NullPointerException e){
+//                            Log.e("Error test", "onClick: NullPointerException: Couldn't open map." + e.getMessage() );
+//                            Toast.makeText(context, "Couldn't open map", Toast.LENGTH_SHORT).show();
+//                        }
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
@@ -53,6 +94,10 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
                 .into(tvImage);
 
         return view;
+
+
     }
+
+
 
 }
