@@ -181,8 +181,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
         for (int i = 0; i < LocationInfo.getName().size(); i++) {
             MarkerOptions marker = new MarkerOptions();
             if (LocationInfo.getRating().get(i) >= TempInfo.getRatingPreference()) {
-                Log.e("Map Error", LocationInfo.getName().get(i));
-                Log.e("Map Error", String.valueOf(LocationInfo.getLatitude().get(i)));
                 marker.position(new LatLng(LocationInfo.getLatitude().get(i), LocationInfo.getLongitude().get(i)));
                 marker.zIndex(i);
                 marker.title(LocationInfo.getName().get(i));

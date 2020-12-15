@@ -22,46 +22,10 @@ import java.text.DecimalFormat;
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private Activity context;
-
     private static DecimalFormat df = new DecimalFormat("0.00");
-
 
     public CustomInfoWindowAdapter(Activity context){
         this.context = context;
-    }
-
-    public void getDirections(Marker marker){
-        final String latPosition = String.valueOf(marker.getPosition().latitude);
-        final String lonPosition = String.valueOf(marker.getPosition().longitude);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Open Google Maps?")
-                .setCancelable(true)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        String latitude = latPosition;
-                        String longitude = lonPosition;
-                        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude);
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-
-//                        try{
-//                            if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
-//                                startActivity(mapIntent);
-//                            }
-//                        }catch (NullPointerException e){
-//                            Log.e("Error test", "onClick: NullPointerException: Couldn't open map." + e.getMessage() );
-//                            Toast.makeText(context, "Couldn't open map", Toast.LENGTH_SHORT).show();
-//                        }
-
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        dialog.cancel();
-                    }
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
     }
 
     @Override

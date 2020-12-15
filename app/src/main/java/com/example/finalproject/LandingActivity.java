@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finalproject.data.LocationInfo;
 import com.example.finalproject.data.TempInfo;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,55 +51,104 @@ public class LandingActivity extends AppCompatActivity {
         ImageButton nearButton = (ImageButton)findViewById(R.id.near_me_button);
         nearButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                v.getContext().startActivity(intent);
+            public void onClick(final View v) {
+                try {
+                    fakePress(v);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new CountDownTimer(3000, 1000) {
+
+                    @Override
+                    public void onTick(long l) {
+                        Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                        v.getContext().startActivity(intent);
+                    }
+                }.start();
             }
         });
 
         ImageButton onWayButton = (ImageButton)findViewById(R.id.on_my_way_button);
         onWayButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Context context = getApplicationContext();
-                CharSequence text = newString;
-                int duration = Toast.LENGTH_SHORT;
+            public void onClick(final View v) {
+                try {
+                    fakePress(v);
 
-                Toast toast = Toast.makeText(context, LocationInfo.getName().get(0), duration);
-                toast.show();
-//                Snackbar.make(v,  bussinessData.getName().get(0), Snackbar.LENGTH_INDEFINITE)
-//                        .setAction("Action", null).show();
-//                Intent intent = new Intent(v.getContext(), MapsActivity.class);
-//                v.getContext().startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new CountDownTimer(2000, 2000) {
+
+                    @Override
+                    public void onTick(long l) {
+                        Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                        v.getContext().startActivity(intent);
+                    }
+                }.start();
             }
         });
 
         ImageButton coffeeButton = (ImageButton)findViewById(R.id.coffee_button);
         coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 try {
                     fakePress(v);
-//                    Intent intent = new Intent(v.getContext(), MapsActivity.class);
-//                    v.getContext().startActivity(intent);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                Intent intent = new Intent(v.getContext(), MapsActivity.class);
-//                intent.putExtra("userTag", bussinessData);
-//                startActivity(intent);
+                new CountDownTimer(3000, 1000) {
 
+                    @Override
+                    public void onTick(long l) {
+                        Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
+                    }
 
-//                v.getContext().startActivity(intent);
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                        v.getContext().startActivity(intent);
+                    }
+                }.start();
             }
         });
 
         ImageButton snackButton = (ImageButton)findViewById(R.id.snacks_button);
         snackButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                v.getContext().startActivity(intent);
+            public void onClick(final View v) {
+                try {
+                    fakePress(v);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                new CountDownTimer(3000, 1000) {
+
+                    @Override
+                    public void onTick(long l) {
+                        Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                        v.getContext().startActivity(intent);
+                    }
+                }.start();
             }
         });
         queue = Volley.newRequestQueue(this);
@@ -125,7 +176,7 @@ public class LandingActivity extends AppCompatActivity {
 
         String myUrl =
                 "https://api.yelp.com/v3/businesses/search" +
-                "?term=snacks" +
+                "?term=" + TempInfo.getSearch() +
                 "&latitude=" + locationTrack.getLatitude() +
                 "&longitude=" + locationTrack.getLongitude() +
                 "&radius=" + TempInfo.getRadius() +
