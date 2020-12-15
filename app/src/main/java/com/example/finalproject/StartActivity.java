@@ -22,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Button loginButton = (Button)findViewById(R.id.login_start);
+        Button loginButton = findViewById(R.id.login_start);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,16 +31,16 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        Button startupButton = (Button)findViewById(R.id.signup_start);
+        Button startupButton = findViewById(R.id.signup_start);
         startupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MenuActivity.class);
+                Intent intent = new Intent(v.getContext(), LoginActivity.class);
                 v.getContext().startActivity(intent);
             }
         });
 
-        TextView continueText = (TextView)findViewById(R.id.continue_text);
+        TextView continueText = findViewById(R.id.continue_text);
         continueText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

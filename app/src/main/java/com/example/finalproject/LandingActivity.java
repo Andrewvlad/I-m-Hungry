@@ -1,10 +1,8 @@
 package com.example.finalproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -35,9 +33,7 @@ import java.util.Map;
 public class LandingActivity extends AppCompatActivity {
 
     private static RequestQueue queue;
-    String newString = "hey";
     LocationTrack locationTrack;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +48,8 @@ public class LandingActivity extends AppCompatActivity {
         nearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                try {
-                    fakePress(v);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                fakePress(v);
                 new CountDownTimer(2000, 1000) {
-
                     @Override
                     public void onTick(long l) {
                         Snackbar.make(v,  "Loading", Snackbar.LENGTH_SHORT).show();
@@ -78,13 +68,8 @@ public class LandingActivity extends AppCompatActivity {
         coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                try {
-                    TempInfo.setSearch("Coffee");
-                    fakePress(v);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                TempInfo.setSearch("Coffee");
+                fakePress(v);
                 new CountDownTimer(2000, 1000) {
 
                     @Override
@@ -105,12 +90,8 @@ public class LandingActivity extends AppCompatActivity {
         snackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                try {
-                    TempInfo.setSearch("Snacks");
-                    fakePress(v);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                TempInfo.setSearch("Snacks");
+                fakePress(v);
                 new CountDownTimer(2000, 1000) {
 
                     @Override
@@ -130,10 +111,7 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
-    public void fakePress(View v) throws JSONException {
-
-//        String queryURL = "https://api.yelp.com/v3/businesses/search?location=New York?radius=40000";
-
+    public void fakePress(View v)  {
         final List<String> setNameValue = new ArrayList<>();
         final List<Integer> setDistanceValue = new ArrayList<>();
         final List<List> setTransactionsValue = new ArrayList<>();

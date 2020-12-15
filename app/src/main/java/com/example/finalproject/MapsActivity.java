@@ -2,16 +2,13 @@ package com.example.finalproject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -29,7 +26,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback, LocationListener {
 
@@ -37,7 +33,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
     private GoogleMap mMap;
     private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
-//    private Activity context;
     private SeekBar ratingSeekBar;
     private SeekBar radiusSeekBar;
     private TextView mapHeader;
