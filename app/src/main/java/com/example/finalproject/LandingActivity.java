@@ -58,7 +58,7 @@ public class LandingActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                new CountDownTimer(3000, 1000) {
+                new CountDownTimer(2000, 1000) {
 
                     @Override
                     public void onTick(long l) {
@@ -105,12 +105,13 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 try {
+                    TempInfo.setSearch("Coffee");
                     fakePress(v);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                new CountDownTimer(3000, 1000) {
+                new CountDownTimer(2000, 1000) {
 
                     @Override
                     public void onTick(long l) {
@@ -131,12 +132,12 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 try {
+                    TempInfo.setSearch("Snacks");
                     fakePress(v);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                new CountDownTimer(3000, 1000) {
+                new CountDownTimer(2000, 1000) {
 
                     @Override
                     public void onTick(long l) {

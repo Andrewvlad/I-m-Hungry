@@ -7,9 +7,9 @@ public class TempInfo {
     private static String mapHeader;
     private static double currentLongitude;
     private static double currentLatitude;
-    private static int radius = 20 * 1609;
+    private static int radius = 7 * 1609;
     private static float zoomLevel = 12.0f;
-    private static String searchTerm;
+    private static String searchTerm = "Restaurants";
 
 
     public static void setRatingPreference(int newRating){
@@ -25,7 +25,7 @@ public class TempInfo {
     }
 
     public static String getMapHeader(){
-        return mapHeader;
+        return searchTerm;
     }
 
     public static void setCurrentLongitude(double newLongitude){

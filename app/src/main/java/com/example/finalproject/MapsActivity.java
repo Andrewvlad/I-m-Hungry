@@ -175,8 +175,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-
 
         for (int i = 0; i < LocationInfo.getName().size(); i++) {
             MarkerOptions marker = new MarkerOptions();
