@@ -44,7 +44,7 @@ public class LandingActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        ImageButton nearButton = (ImageButton)findViewById(R.id.near_me_button);
+        ImageButton nearButton = findViewById(R.id.near_me_button);
         nearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

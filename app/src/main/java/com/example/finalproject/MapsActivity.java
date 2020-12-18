@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,6 +8,13 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -25,21 +33,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback, LocationListener {
 
-
     private GoogleMap mMap;
-    private MarkerOptions options = new MarkerOptions();
-    private ArrayList<LatLng> latlngs = new ArrayList<>();
     private SeekBar ratingSeekBar;
     private SeekBar radiusSeekBar;
     private TextView mapHeader;
+    private CheckBox lowPriceCheck;
+    private CheckBox medPriceCheck;
+    private CheckBox highPriceCheck;
     private FusedLocationProviderClient fusedLocationClient;
-    LocationTrack locationTrack;
+    LocationTrack locationTrack;    
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +53,46 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mapFragment.getMapAsync(this);
         ratingSeekBar = findViewById(R.id.ratingBar);
         ratingSeekBar.setProgress(TempInfo.getRatingPreference() - 3);
         radiusSeekBar = findViewById(R.id.radiusBar);
+        lowPriceCheck = findViewById(R.id.lowPriceCheckBox);
+        medPriceCheck = findViewById(R.id.medPriceCheckBox);
+        highPriceCheck = findViewById(R.id.highPriceCheckBox);
+        lowPriceCheck.setChecked(TempInfo.getLow());
+        medPriceCheck.setChecked(TempInfo.getMed());
+        highPriceCheck.setChecked(TempInfo.getHigh());
+        lowPriceCheck.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                TempInfo.setLow(b);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+        medPriceCheck.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                TempInfo.setMed(b);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+        highPriceCheck.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                TempInfo.setHigh(b);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
         switch ((int) ((TempInfo.getRadius()) / 1609.0)){
             case 1:
                 radiusSeekBar.setProgress(0);
@@ -85,6 +127,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
         } else {
             locationTrack.showSettingsAlert();
         }
+
 
         ratingSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -154,6 +197,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
 
             }
         });
+
     }
 
     /**
@@ -172,7 +216,18 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
 
         for (int i = 0; i < LocationInfo.getName().size(); i++) {
             MarkerOptions marker = new MarkerOptions();
-            if (LocationInfo.getRating().get(i) >= TempInfo.getRatingPreference()) {
+            String price = LocationInfo.getPrice().get(i);
+            boolean priceMatch = false;
+            if (price.equals("$")){
+                priceMatch = TempInfo.getLow();
+            }
+            else if (price.equals("$$")){
+                priceMatch = TempInfo.getMed();
+            }
+            else if (price.equals("$$$")){
+                priceMatch = TempInfo.getHigh();
+            }
+            if (LocationInfo.getRating().get(i) >= TempInfo.getRatingPreference() && priceMatch && LocationInfo.getDistance().get(i) <= TempInfo.getRadius()) {
                 marker.position(new LatLng(LocationInfo.getLatitude().get(i), LocationInfo.getLongitude().get(i)));
                 marker.zIndex(i);
                 marker.title(LocationInfo.getName().get(i));

@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/radioButtonD"
+        app:layout_constraintBottom_toTopOf="@+id/lowPriceCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapHeader"
@@ -40,6 +40,7 @@
         android:id="@+id/textView24"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Now Showing:"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,10 +63,10 @@
         android:layout_marginEnd="8dp"
         android:max="2"
         android:progress="1"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonDDD"
+        app:layout_constraintBottom_toBottomOf="@+id/highPriceCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/radioButtonDDD" />
+        app:layout_constraintTop_toTopOf="@+id/highPriceCheckBox" />
 
     <SeekBar
         android:id="@+id/radiusBar"
@@ -132,9 +133,9 @@
         android:layout_marginBottom="16dp"
         android:text="$"
         app:layout_constraintBottom_toTopOf="@+id/radiusBar"
-        app:layout_constraintEnd_toEndOf="@+id/radioButtonD"
+        app:layout_constraintEnd_toEndOf="@+id/lowPriceCheckBox"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/radioButtonD" />
+        app:layout_constraintStart_toStartOf="@+id/lowPriceCheckBox" />
 
     <TextView
         android:id="@+id/textView18"
@@ -142,8 +143,8 @@
         android:layout_height="wrap_content"
         android:text="$$"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
-        app:layout_constraintEnd_toEndOf="@+id/radioButtonDD"
-        app:layout_constraintStart_toStartOf="@+id/radioButtonDD"
+        app:layout_constraintEnd_toEndOf="@+id/medPriceCheckBox"
+        app:layout_constraintStart_toStartOf="@+id/medPriceCheckBox"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
     <TextView
@@ -152,41 +153,10 @@
         android:layout_height="wrap_content"
         android:text="$$$+"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
-        app:layout_constraintEnd_toEndOf="@+id/radioButtonDDD"
+        app:layout_constraintEnd_toEndOf="@+id/highPriceCheckBox"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/radioButtonDDD"
+        app:layout_constraintStart_toStartOf="@+id/highPriceCheckBox"
         app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-    <RadioButton
-        android:id="@+id/radioButtonD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:checked="true"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/textView17"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonDD"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RadioButton
-        android:id="@+id/radioButtonDD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonD"
-        app:layout_constraintEnd_toStartOf="@+id/radioButtonDDD"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/radioButtonD"
-        app:layout_constraintTop_toTopOf="@+id/radioButtonD" />
-
-    <RadioButton
-        android:id="@+id/radioButtonDDD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButtonDD"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-        app:layout_constraintStart_toEndOf="@+id/radioButtonDD"
-        app:layout_constraintTop_toTopOf="@+id/radioButtonDD" />
 
     <TextView
         android:id="@+id/textView20"
@@ -217,6 +187,37 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="@+id/ratingBar"
         app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <CheckBox
+        android:id="@+id/lowPriceCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView17"
+        app:layout_constraintEnd_toStartOf="@+id/medPriceCheckBox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/highPriceCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/medPriceCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/medPriceCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/medPriceCheckBox" />
+
+    <CheckBox
+        android:id="@+id/medPriceCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/lowPriceCheckBox"
+        app:layout_constraintEnd_toStartOf="@+id/highPriceCheckBox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lowPriceCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/lowPriceCheckBox" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
