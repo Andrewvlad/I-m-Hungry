@@ -17,8 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.finalproject.data.LocationInfo;
-import com.example.finalproject.data.TempInfo;
+import com.example.finalproject.data.model.LocationInfo;
+import com.example.finalproject.data.model.TempInfo;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;

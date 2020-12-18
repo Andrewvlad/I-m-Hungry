@@ -1,4 +1,4 @@
-package com.example.finalproject.data;
+package com.example.finalproject.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

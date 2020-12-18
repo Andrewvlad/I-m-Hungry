@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.finalproject.ui.login.LoginActivity;
-
 
 public class StartActivity extends AppCompatActivity {
 
@@ -27,6 +25,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                intent.putExtra("Action", "Login");
                 v.getContext().startActivity(intent);
             }
         });
@@ -36,6 +35,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                intent.putExtra("Action", "Register");
                 v.getContext().startActivity(intent);
             }
         });

@@ -8,20 +8,16 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.finalproject.data.LocationInfo;
-import com.example.finalproject.data.TempInfo;
+import com.example.finalproject.data.model.LocationInfo;
+import com.example.finalproject.data.model.TempInfo;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
