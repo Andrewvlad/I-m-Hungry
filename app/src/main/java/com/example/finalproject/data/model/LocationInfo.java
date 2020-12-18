@@ -1,13 +1,10 @@
 package com.example.finalproject.data.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LocationInfo implements Parcelable {
+public class LocationInfo {
 
     private static List<String> name = new ArrayList<>();
     private static List<Integer> distance = new ArrayList<>();
@@ -118,29 +115,6 @@ public class LocationInfo implements Parcelable {
         return phone;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
-    public static final Creator<LocationInfo> CREATOR= new Creator<LocationInfo>() {
-
-        @Override
-        public LocationInfo createFromParcel(Parcel source) {
-// TODO Auto-generated method stub
-            return new LocationInfo();  //using parcelable constructor
-        }
-
-        @Override
-        public LocationInfo[] newArray(int size) {
-// TODO Auto-generated method stub
-            return new LocationInfo[size];
-        }
-    };
 
 }
 

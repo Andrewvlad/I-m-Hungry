@@ -48,7 +48,7 @@ public class LandingActivity extends AppCompatActivity {
         nearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                fakePress(v);
+                onSearch(v);
                 new CountDownTimer(2000, 1000) {
                     @Override
                     public void onTick(long l) {
@@ -64,12 +64,12 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton coffeeButton = (ImageButton)findViewById(R.id.coffee_button);
+        ImageButton coffeeButton = findViewById(R.id.coffee_button);
         coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 TempInfo.setSearch("Coffee");
-                fakePress(v);
+                onSearch(v);
                 new CountDownTimer(2000, 1000) {
 
                     @Override
@@ -91,7 +91,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(final View v) {
                 TempInfo.setSearch("Snacks");
-                fakePress(v);
+                onSearch(v);
                 new CountDownTimer(2000, 1000) {
 
                     @Override
@@ -111,7 +111,7 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
-    public void fakePress(View v)  {
+    public void onSearch(View v)  {
         final List<String> setNameValue = new ArrayList<>();
         final List<Integer> setDistanceValue = new ArrayList<>();
         final List<List> setTransactionsValue = new ArrayList<>();

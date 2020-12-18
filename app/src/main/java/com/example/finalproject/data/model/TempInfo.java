@@ -13,8 +13,6 @@ public class TempInfo {
     private static boolean medPrice = true;
     private static boolean highPrice = true;
 
-
-
     public static void setRatingPreference(int newRating){
         ratingPreference = newRating;
     }

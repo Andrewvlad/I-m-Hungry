@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.finalproject.data.model.LocationInfo;
 import com.example.finalproject.data.model.TempInfo;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,8 +37,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
     private CheckBox lowPriceCheck;
     private CheckBox medPriceCheck;
     private CheckBox highPriceCheck;
-    private FusedLocationProviderClient fusedLocationClient;
-    LocationTrack locationTrack;    
+    LocationTrack locationTrack;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -240,10 +238,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
         );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, TempInfo.getZoomLevel() + .5f));
         mMap.setOnInfoWindowClickListener(this);
-        drawCircle(currentLocation);
+        drawRadius(currentLocation);
     }
-
-
 
     @Override
     public void onInfoWindowClick(final Marker marker) {
@@ -268,7 +264,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnInfoWi
         alert.show();
     }
 
-    private void drawCircle( LatLng location ) {
+    private void drawRadius(LatLng location ) {
         CircleOptions options = new CircleOptions();
         options.center( location );
         //Radius in meters

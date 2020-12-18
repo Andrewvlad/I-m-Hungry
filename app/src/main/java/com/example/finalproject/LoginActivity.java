@@ -1,50 +1,21 @@
 package com.example.finalproject;
 
-import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.finalproject.LandingActivity;
-import com.example.finalproject.MapsActivity;
-import com.example.finalproject.R;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
-
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -52,8 +23,6 @@ import com.parse.LogInCallback;
 
 
 public class LoginActivity extends AppCompatActivity {
-
-    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
                 .server(getString(R.string.back4app_server_url))
                 .build()
         );
+
         setContentView(R.layout.activity_login);
 
         final EditText usernameText = findViewById(R.id.username);
@@ -71,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         final TextView loginHeader = findViewById(R.id.login_header);
         final Button loginButton = findViewById(R.id.login);
         final Button registerButton = findViewById(R.id.register);
-        final Button googleButton = findViewById(R.id.googleButton);
 
         String action = getIntent().getStringExtra("Action");
         if (action.equals("Login")){
@@ -101,12 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 login(String.valueOf(usernameText.getText()), String.valueOf(passwordText.getText()));
             }
         });
-        googleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
     }
 
     void registration(final String username, String password){
@@ -126,6 +89,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void login(final String username, String password){
+        ParseUser.logInInBackground(String.valueOf(username), String.valueOf(password), new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (parseUser != null) {
+                    alertDisplayer("Sucessful Login","Welcome back" + username + "!");
+                } else {
+                    ParseUser.logOut();
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void logout(){
+        ParseUser.logOut();
+        alertDisplayer("So, you're going...", "Ok...Bye-bye then");
+
+    }
+
     private void alertDisplayer(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this)
                 .setTitle(title)
@@ -142,24 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
         AlertDialog ok = builder.create();
         ok.show();
-    }
-    private void login(final String username, String password){
-        ParseUser.logInInBackground(String.valueOf(username), String.valueOf(password), new LogInCallback() {
-            @Override
-            public void done(ParseUser parseUser, ParseException e) {
-                if (parseUser != null) {
-                    alertDisplayer("Sucessful Login","Welcome back" + username + "!");
-                } else {
-                    ParseUser.logOut();
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-    private void logout(){
-        ParseUser.logOut();
-        alertDisplayer("So, you're going...", "Ok...Bye-bye then");
-
     }
 
 }
